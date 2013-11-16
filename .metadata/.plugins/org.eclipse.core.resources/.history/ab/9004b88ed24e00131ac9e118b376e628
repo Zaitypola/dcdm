@@ -1,0 +1,15 @@
+class Location:
+    def __init__(self,name,address,city,country,latitude,altitude,photo_url):
+        self.id=-1
+        self.name=name
+        self.address=address
+        self.city=city
+        self.country=country
+        self.latitude=latitude
+        self.altitude=altitude
+        self.photo_url=photo_url       
+    def toString(self):
+        print "Name: " + self.name + " - Address: " +self.address + " - City: " + self.city + " - Country: " + self.country + " - Altitude: " + str(self.altitude) + " - Latitude: " + str(self.latitude) + " - Theme: " + self.theme + " - Photo: " + self.photo_url
+        
+        
+location = Location("Torre del Oro", "Paseo de Colón s/n", "Seville", "Spain", latitude, altitude, photo_url)         

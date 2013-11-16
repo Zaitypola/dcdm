@@ -1,0 +1,6 @@
+import classes.locationDAOClass as DAO
+
+
+db_client = DAO.LocationsDAO()
+
+print db_client.findAll()

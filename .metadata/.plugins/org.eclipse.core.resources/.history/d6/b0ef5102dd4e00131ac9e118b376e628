@@ -1,0 +1,4 @@
+import classes.locationDAOClass
+
+
+db_client = LocationsDAO()

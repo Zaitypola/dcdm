@@ -1,0 +1,16 @@
+class Location:
+    def __init__(self,name,address,city,country,age,theme,photo_url):
+        self.id=-1
+        self.name=name
+        self.address=address
+        self.city=city
+        self.country=country
+        self.age=age
+        self.theme=theme
+        self.photo_url=photo_url
+        
+        
+
+
+        
+    

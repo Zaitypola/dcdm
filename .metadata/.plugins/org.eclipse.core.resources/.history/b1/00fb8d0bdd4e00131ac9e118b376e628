@@ -1,0 +1,5 @@
+import classes.locationDAOClass as DAO
+
+
+db_client = DAO.LocationsDAO()
+

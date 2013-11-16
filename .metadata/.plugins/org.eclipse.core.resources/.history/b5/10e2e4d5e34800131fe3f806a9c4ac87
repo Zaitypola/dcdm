@@ -1,0 +1,17 @@
+import pymongo as db
+
+client = db.MongoClient('mongodb://localhost:27017')
+
+locations_db = client.locations_db
+
+location_a = {
+              "Id" : -1,
+              "Name" : "Test",
+              "City" : "Seville",
+              "Country" : "Spain"              
+              }
+
+
+
+
+

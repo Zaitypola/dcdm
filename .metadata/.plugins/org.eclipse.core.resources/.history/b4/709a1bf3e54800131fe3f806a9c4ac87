@@ -1,0 +1,16 @@
+import pymongo as db
+
+client = db.MongoClient('mongodb://localhost:27017')
+
+locations_db = client.locations_db
+
+location_a = {
+              "Name" : "Universidad de Sevilla",
+              "City" : "Seville",
+              "Country" : "Spain"              
+              }
+
+locations_db.insert(location_a)
+
+
+

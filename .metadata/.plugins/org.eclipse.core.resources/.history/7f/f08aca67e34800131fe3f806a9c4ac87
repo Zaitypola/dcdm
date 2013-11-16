@@ -1,0 +1,10 @@
+import pymongo as db
+
+client = db.MongoClient('mongodb://localhost:27017')
+
+
+
+
+
+
+

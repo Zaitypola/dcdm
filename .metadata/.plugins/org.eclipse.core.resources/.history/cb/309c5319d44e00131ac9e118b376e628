@@ -1,0 +1,19 @@
+import pymongo as mongodb
+
+#MongoDB client
+client = mongodb.MongoClient('mongodb://localhost:27017')
+#Database
+db = client.db
+#Collection inside the database
+locations = db.locations
+#Location example
+location_a = {
+              "Name" : "Universidad de Sevilla",
+              "City" : "Seville",
+              "Country" : "Spain"              
+              }
+#Insert the document in the collection
+
+print locations.count()
+
+locations.insert(location_a)

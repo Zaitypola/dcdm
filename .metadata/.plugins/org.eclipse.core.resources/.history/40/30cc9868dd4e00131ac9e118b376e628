@@ -1,0 +1,7 @@
+import 
+
+db_client = DAO.LocationsDAO()
+
+
+for location in db_client.findAll():
+    print location
