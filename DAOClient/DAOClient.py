@@ -12,8 +12,13 @@ def main(argv):
                 print 'getall'
             if match.group(1) == "FINDBYNAME":
                 atts = re.split(" ",match.group(2))
-                for att in atts:
-                    print att 
+                name = atts[0]
+                locations = DAOClient.findByName(name)
+                for location in locations:
+                    print "******Location******"
+                    for index in location:
+                        print index +": "+str(location[index])
+                    print "********************\n"
             if match.group(1) == "GET":
                 print 'get'
             if match.group(1) == "UPDATE":
@@ -22,7 +27,6 @@ def main(argv):
                 print 'create'
             if match.group(1) == "DELETE":
                 print 'delete'
-            
-          
+                      
 if __name__ == "__main__":
     main(sys.argv)

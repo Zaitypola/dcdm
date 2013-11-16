@@ -1,7 +1,6 @@
 import pymongo as mongodb
 from bson.objectid import ObjectId
-
-class LocationsDAO:
+class LocationDAO:
     
     def __init__(self):
         self.client = mongodb.MongoClient('mongodb://localhost:27017')
@@ -19,11 +18,10 @@ class LocationsDAO:
     def create(self,location):
         id = self.locations.insert({
                                       "Name" : location.name,
-                                      "Address" : location.address,
                                       "City" : location.city,
                                       "Country" : location.country,
-                                      "Age" : location.age,
-                                      "Theme" : location.theme,
+                                      "Lat" : location.lat,
+                                      "Long" : location.long,
                                       "PhotoURL" : location.photo_url
                                       })
         location.id=id
@@ -32,11 +30,10 @@ class LocationsDAO:
     def update(self,location):
         return self.locations.save({   "_id" : location.id,
                                       "Name" : location.name,
-                                      "Address" : location.address,
                                       "City" : location.city,
                                       "Country" : location.country,
-                                      "Age" : location.age,
-                                      "Theme" : location.theme,
+                                      "Lat" : location.lat,
+                                      "Long" : location.long,
                                       "PhotoURL" : location.photo_url
                                       })
         return location.id

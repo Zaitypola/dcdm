@@ -1,0 +1,28 @@
+from locationDAOClass import *
+import sys
+import re
+
+def main(argv):
+    f=open(argv[1])
+    DAOClient = LocationDAO()
+    for command in f:
+        match = re.search('(GETALL|FINDBYNAME|GET|UPDATE|CREATE|DELETE)\s?(.+)*',command)
+        if match:
+            if match.group(1) == "GETALL":
+                print 'getall'
+            if match.group(1) == "FINDBYNAME":
+                atts = re.split(" ",match.group(2))
+                name = atts[0]
+                DAOClient.findByName(name)
+            if match.group(1) == "GET":
+                print 'get'
+            if match.group(1) == "UPDATE":
+                print 'update'
+            if match.group(1) == "CREATE":
+                print 'create'
+            if match.group(1) == "DELETE":
+                print 'delete'
+            
+          
+if __name__ == "__main__":
+    main(sys.argv)

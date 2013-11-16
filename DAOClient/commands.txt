@@ -1,7 +1,1 @@
-GETALL
-FINDBYNAME asdf asdf asdfasdf asdf
-GET
-CREATE
-DELETE
-UPDATE
-DELETE
+FINDBYNAME sevilla
