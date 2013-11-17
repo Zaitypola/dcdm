@@ -1,0 +1,113 @@
+from locationDAOClass import *
+from locationClass import Location
+import sys
+import re
+
+def print_locations(locations):
+    for location in locations:
+        print "******Location******"
+        for index in location:
+            print index +": "+str(location[index])
+        print "********************"
+        
+def print_location(location):
+    print "******Location******"
+    for index in location:
+        print index +": "+str(location[index])
+    print "********************"
+
+
+
+def main(argv):
+    f=open(argv[1])
+    DAOClient = LocationDAO()
+    for command in f:
+        match = re.search('(GETALL|FINDBYNAME|GET|UPDATE|CREATE|DELETE)\s?("?.+"?)*',command)
+        if match:
+            if match.group(1) == "GETALL":
+                locations = DAOClient.findAll()
+                print_locations(locations)
+                
+            if match.group(1) == "FINDBYNAME":
+                search = re.search('"(.+)"',match.group(2))   
+                name=search.group(1)
+                locations = DAOClient.findByName(name)
+                print_locations(locations)
+                
+            if match.group(1) == "GET":
+                id = match.group(2)
+                location = DAOClient.findById(id)
+                print_location(location)
+                
+            if match.group(1) == "UPDATE":
+                atts = re.split("UPDATE ",match.group(2))
+                if re.search('id:(\w+)',atts[0]):
+                    id=re.search('id:(\w+)',atts[0]).group(1)
+                    previous_location = DAOClient.findById(id)
+                else:
+                    print "Error on UPDATE - No id provided"
+                if re.search('Name:"([\w+\s]+)"',atts[0]):
+                    name = re.search('Name:"([\w+\s]+)"',atts[0]).group(1)
+                else:
+                    name = previous_location['Name']
+                if re.search('City:"([\w+\s]+)"',atts[0]):
+                    city=re.search('City:"([\w+\s]+)"',atts[0]).group(1)
+                else:
+                    city = previous_location['City']
+                if re.search('Country:"([\w+\s]+)"',atts[0]):
+                    country=re.search('Country:"([\w+\s]+)"',atts[0]).group(1)
+                else:
+                    country = previous_location['Country']
+                if re.search('Lat:([-\d+\.]+)',atts[0]):
+                    lat=re.search('Lat:([-\d+\.]+)',atts[0]).group(1)
+                else:
+                    lat=previous_location['Lat']
+                if re.search('Long:([-\d+\.]+)',atts[0]):
+                    long=re.search('Long:([-\d+\.]+)',atts[0]).group(1)
+                else:
+                    long=previous_location['Long']
+                if re.search('Photo:(http://.+)',atts[0]):
+                    photo_url=re.search('Photo:(http://([^\s]+))',atts[0]).group(1)
+                else:
+                    photo_url=previous_location['Photo']
+                    
+                location=Location(name, city, country, lat, long, photo_url)
+                location.id = id        
+                DAOClient.update(location)
+
+            if match.group(1) == "CREATE":
+                atts = re.split("CREATE ",match.group(2))
+                if re.search('Name:"([\w+\s]+)"',atts[0]):
+                    name = re.search('Name:"([\w+\s]+)"',atts[0]).group(1)
+                else:
+                    print "No name provided"
+                if re.search('City:"([\w+\s]+)"',atts[0]):
+                    city=re.search('City:"([\w+\s]+)"',atts[0]).group(1)
+                else:
+                    print "No city provided"                   
+                if re.search('Country:"([\w+\s]+)"',atts[0]):
+                    country=re.search('Country:"([\w+\s]+)"',atts[0]).group(1)
+                else:
+                    print "No country provided"                    
+                if re.search('Lat:([-\d+\.]+)',atts[0]):
+                    lat=re.search('Lat:([-\d+\.]+)',atts[0]).group(1)
+                else:
+                    print "No latitude provided"
+                if re.search('Long:([-\d+\.]+)',atts[0]):
+                    long=re.search('Long:([-\d+\.]+)',atts[0]).group(1)
+                else:
+                    print "No longitude provided"
+                if re.search('Photo:(http://.+)',atts[0]):
+                    photo_url=re.search('Photo:(http://([^\s]+))',atts[0]).group(1)
+                else:
+                    print "No photo url provided"
+                                      
+                #location=Location(name, city, country, lat, long, photo_url)
+                #DAOClient.create(location)                
+                
+                
+            if match.group(1) == "DELETE":
+                print 'delete'
+                      
+if __name__ == "__main__":
+    main(sys.argv)

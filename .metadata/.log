@@ -981,3 +981,9 @@ Binding(CTRL+SHIFT+T,
 		,,true),null),
 	org.eclipse.ui.defaultAcceleratorConfiguration,
 	org.python.pydev.ui.editor.scope,,,system)
+
+!ENTRY org.eclipse.equinox.security 1 0 2013-11-16 19:02:39.363
+!MESSAGE New keyring password generated. 
+
+!ENTRY org.eclipse.core.resources 4 376 2013-11-16 19:06:55.164
+!MESSAGE Marker id 2107 not found.

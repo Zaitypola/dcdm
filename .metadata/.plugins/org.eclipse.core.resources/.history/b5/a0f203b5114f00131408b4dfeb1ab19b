@@ -1,0 +1,57 @@
+from locationDAOClass import *
+import locationClass
+import sys
+import re
+
+def print_locations(locations):
+    for location in locations:
+        print "******Location******"
+        for index in location:
+            print index +": "+str(location[index])
+        print "********************\n"
+        
+def print_location(location):
+    print "******Location******"
+    for index in location:
+        print index +": "+str(location[index])
+    print "********************\n"
+
+
+
+def main(argv):
+    f=open(argv[1])
+    DAOClient = LocationDAO()
+    for command in f:
+        match = re.search('(GETALL|FINDBYNAME|GET|UPDATE|CREATE|DELETE)\s?("?.+"?)*',command)
+        if match:
+            if match.group(1) == "GETALL":
+                locations = DAOClient.findAll()
+                print_locations(locations)
+            if match.group(1) == "FINDBYNAME":
+                search = re.search('"(.+)"',match.group(2))   
+                name=search.group(1)
+                locations = DAOClient.findByName(name)
+                print_locations(locations)
+            if match.group(1) == "GET":
+                atts = re.split(" ",match.group(2))
+                id = atts[0]
+                location = DAOClient.findById(id)
+                print_location(location)
+            if match.group(1) == "UPDATE":
+                atts = re.split("UPDATE ",match.group(2))
+                id=re.search('id:(\w+)',atts[0]).group(1)
+                name=re.search('Name:"([\w+\s]+)+"',atts[0]).group(1)
+                city=re.search('City:"([\w+\s]+)+"',atts[0]).group(1)
+                country=re.search('Country:"([\w+\s]+)+"',atts[0]).group(1)
+                lat=re.search('Lat:"([\w+\s]+)+"',atts[0]).group(1)
+                print id
+                print name
+                print city  
+                
+            if match.group(1) == "CREATE":
+                print 'create'
+            if match.group(1) == "DELETE":
+                print 'delete'
+                      
+if __name__ == "__main__":
+    main(sys.argv)

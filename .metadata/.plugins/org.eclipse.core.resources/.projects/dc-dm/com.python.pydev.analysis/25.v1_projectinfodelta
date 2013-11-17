@@ -1,0 +1,15 @@
+INSTUPclasses.locationClass
+C:\Users\zaity\workspace\dc-dm\classes\locationClass.py
+INFOS:&&1|1|2|0&&2|3|2|1&&3|4|2|5&&3|6|2|5&&3|7|2|5&&3|8|2|5&&3|9|2|5&&3|10|2|5&&3|11|2|5&&2|12|2|1
+photo_url=11
+Location=1
+classes.locationClass=2
+long=10
+city=7
+country=8
+id=4
+__init__=3
+name=6
+Location.__init__=5
+toString=12
+lat=9

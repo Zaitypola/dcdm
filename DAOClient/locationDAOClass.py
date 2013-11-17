@@ -25,10 +25,9 @@ class LocationDAO:
                                       "PhotoURL" : location.photo_url
                                       })
         location.id=id
-        return id
-        
+              
     def update(self,location):
-        return self.locations.save({   "_id" : location.id,
+        res = self.locations.save({   "_id" : ObjectId(location.id),
                                       "Name" : location.name,
                                       "City" : location.city,
                                       "Country" : location.country,
@@ -36,7 +35,9 @@ class LocationDAO:
                                       "Long" : location.long,
                                       "PhotoURL" : location.photo_url
                                       })
-        return location.id
-        
+        if res:
+            print "UPDATE successful"
+        else:
+            print "UPDATE failed"
     def delete(self,location):
         return self.locations.remove({"_id": location.id})
